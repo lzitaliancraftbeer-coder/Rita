@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rita La Rosa | Nutrizione Consapevole</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde-deep: #2D5A43;
+            --verde-light: #F0F7F4;
+            --arancio: #FF7A45;
+            --arancio-hover: #E66A39;
+            --text: #333;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- Navigazione --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--verde-deep); font-weight: bold; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--verde-deep); font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--arancio); }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 90vh; display: flex; align-items: center; padding: 0 8%;
+            background: linear-gradient(135deg, var(--verde-light) 0%, #ffffff 100%);
+            position: relative; overflow: hidden;
+        }
+        .hero-content { max-width: 600px; z-index: 2; }
+        .hero-content h1 { 
+            font-family: 'Playfair Display', serif; font-size: 4rem; 
+            color: var(--verde-deep); line-height: 1.1; margin-bottom: 20px;
+        }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 30px; color: #555; }
+        
+        .btn-wow {
+            padding: 15px 35px; background: var(--arancio); color: white;
+            text-decoration: none; border-radius: 50px; font-weight: bold;
+            display: inline-block; transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 122, 69, 0.3);
+        }
+        .btn-wow:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(255, 122, 69, 0.4); }
+
+        /* Forme decorative WOW */
+        .blob {
+            position: absolute; right: -10%; width: 600px; height: 600px;
+            background: var(--arancio); opacity: 0.1; border-radius: 50%;
+            filter: blur(80px); animation: float 10s infinite alternate;
+        }
+        @keyframes float { from { transform: translate(0,0); } to { transform: translate(-50px, 50px); } }
+
+        /* --- Sezione Servizi --- */
+        .services { padding: 100px 8%; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 50px; }
+        .card {
+            padding: 40px; border-radius: 24px; background: var(--white);
+            border: 1px solid #eee; transition: 0.4s; position: relative;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--arancio); }
+        .card i { font-size: 2rem; color: var(--arancio); margin-bottom: 20px; display: block; }
+        .card h3 { color: var(--verde-deep); margin-bottom: 15px; }
+
+        /* --- Sezione Articoli (SEO Optimized) --- */
+        .articoli { padding: 100px 8%; background: var(--verde-deep); color: white; }
+        .articoli h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 40px; }
+        .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .art-item { 
+            background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;
+            transition: 0.3s; border-left: 4px solid var(--arancio);
+        }
+        .art-item:hover { background: rgba(255,255,255,0.1); }
+        .art-item h4 { margin-bottom: 10px; color: var(--arancio); }
+
+        /* --- Footer & Social --- */
+        footer { padding: 50px 8%; background: #f9f9f9; text-align: center; }
+        .social-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; }
+        .social-links a { 
+            width: 45px; height: 45px; border-radius: 50%; background: var(--verde-deep);
+            color: white; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s;
+        }
+        .social-links a:hover { background: var(--arancio); transform: scale(1.1); }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .art-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Rita La Rosa</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#chi-siamo">Chi Sono</a></li>
+            <li><a href="#servizi">Servizi</a></li>
+            <li><a href="#articoli">Articoli</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="blob"></div>
+        <div class="hero-content">
+            <h1>Nutri la tua mente, ama il tuo corpo.</h1>
+            <p>Esplora il Metodo Mangia Consapevole: un percorso personalizzato per ritrovare l'equilibrio senza rinunce drastiche.</p>
+            <a href="#contatti" class="btn-wow">Inizia il tuo Percorso</a>
+        </div>
+    </section>
+
+    <section class="services" id="servizi">
+        <h6>I MIEI SERVIZI</h6>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--verde-deep);">Consulenze Su Misura</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Visita Nutrizionale</h3>
+                <p>Analisi della composizione corporea e piano alimentare personalizzato per i tuoi obiettivi.</p>
+            </div>
+            <div class="card">
+                <h3>Mindful Eating</h3>
+                <p>Impara a gestire il rapporto emotivo con il cibo e a riconoscere i segnali di fame e sazietà.</p>
+            </div>
+            <div class="card">
+                <h3>Percorsi Sportivi</h3>
+                <p>Ottimizza la tua performance attraverso un'integrazione e un'alimentazione specifica.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="articoli" id="articoli">
+        <h2>Articoli & Consigli</h2>
+        <div class="art-grid">
+            <div class="art-item">
+                <h4>01. SEO Topic</h4>
+                <p>Come la nutrizione influisce sul sonno: 5 consigli pratici.</p>
+            </div>
+            <div class="art-item">
+                <h4>02. Ricette Light</h4>
+                <p>Colazioni bilanciate per iniziare la giornata con energia.</p>
+            </div>
+            <div class="art-item">
+                <h4>03. Mindset</h4>
+                <p>Perché le diete restrittive non funzionano nel lungo termine.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contatti">
+        <p>Seguimi sui social per consigli quotidiani</p>
+        <div class="social-links">
+            <a href="#">IG</a>
+            <a href="#">FB</a>
+            <a href="#">LI</a>
+        </div>
+        <p>&copy; 2024 Rita La Rosa - Dott.ssa Dietista Nutrizionista</p>
+    </footer>
+
+</body>
+</html>
