@@ -3,229 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rita La Rosa | Nutrizionista & Benessere</title>
+    <title>Rita La Rosa | Nutrizionista Wow</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,900&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
-            --verde-deep: #2D5A43;
-            --verde-glass: rgba(45, 90, 67, 0.05);
-            --arancio: #FF7A45;
-            --arancio-bright: #ff936a;
+            --verde: #1a4332;
+            --verde-light: #2d5a43;
+            --arancio: #ff7a45;
+            --arancio-hover: #e66a39;
+            --bg-light: #f8faf9;
             --white: #ffffff;
         }
 
+        /* Reset e Base */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            color: #333; 
+            background-color: var(--bg-light); 
+            color: var(--verde);
             overflow-x: hidden;
-            background: #fdfdfd;
         }
 
-        /* --- EFFETTO PARALLASSE HERO --- */
-        .parallax-wrapper {
-            height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
-            perspective: 10px; /* Cruciale per il parallasse CSS */
-        }
-
-        .hero {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            transform-style: preserve-3d;
-            z-index: -1;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 120%;
-            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
-                        url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            transform: translateZ(-10px) scale(2.1); /* Questo crea il movimento lento */
-            z-index: -1;
-        }
-
-        .hero-content {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 60px;
-            border-radius: 40px;
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-            max-width: 800px;
-        }
-
-        /* --- HEADER & NAV --- */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 8%;
+        /* Header Dinamico */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 25px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; transition: 0.4s;
+            z-index: 1000; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        nav.sticky { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 15px 8%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 8%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        header .logo { 
+            font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; 
+            color: var(--white); transition: 0.3s;
+        }
+        header.scrolled .logo { color: var(--verde); }
 
-        /* --- CARTE SERVIZI (GLASSMORPHISM) --- */
-        .section-padding { padding: 120px 8%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
+        .nav-links a { 
+            text-decoration: none; color: var(--white); font-weight: 600; 
+            font-size: 0.95rem; transition: 0.3s;
+        }
+        header.scrolled .nav-links a { color: var(--verde); }
+        .nav-links a:hover { color: var(--arancio) !important; }
+
+        /* Hero Section Wow */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(rgba(26, 67, 50, 0.7), rgba(26, 67, 50, 0.7)), 
+                        url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070') center/cover;
+            text-align: center; color: var(--white); padding: 0 10%;
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); line-height: 1; margin-bottom: 20px; }
         
-        .card-wow {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid #f0f0f0;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
+        /* Sezioni Generali */
+        section { padding: 120px 8%; position: relative; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 50px; }
+
+        /* Sezione Chi Siamo */
+        #chi-siamo { background: var(--white); display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+        .about-text { flex: 1; min-width: 300px; }
+        .about-img { flex: 1; min-width: 300px; height: 500px; background: var(--verde); border-radius: 40px; overflow: hidden; }
+
+        /* Sezione Servizi (Grid Wow) */
+        #servizi { background: var(--bg-light); }
+        .grid-servizi { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card {
+            background: var(--white); padding: 50px 40px; border-radius: 40px;
+            transition: 0.4s; border: 1px solid rgba(0,0,0,0.05); cursor: pointer;
+        }
+        .service-card:hover { transform: translateY(-20px); background: var(--verde); color: var(--white); }
+        .service-card h3 { margin-bottom: 15px; font-size: 1.8rem; }
+
+        /* Sezione Articoli (SEO) */
+        #articoli { background: var(--white); }
+        .art-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .art-box { border-radius: 30px; overflow: hidden; background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .art-content { padding: 30px; }
+
+        /* Sezione Contatti */
+        #contatti { background: var(--verde); color: var(--white); border-radius: 80px 80px 0 0; }
+        .contact-container { display: flex; justify-content: space-between; gap: 50px; flex-wrap: wrap; }
+        .contact-form { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px; }
+        input, textarea { 
+            padding: 20px; border-radius: 15px; border: none; background: rgba(255,255,255,0.1); 
+            color: white; font-family: inherit;
         }
 
-        .card-wow:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 40px 80px rgba(45, 90, 67, 0.1);
-            border-color: var(--arancio);
+        /* Pulsanti */
+        .btn {
+            padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 800;
+            display: inline-block; transition: 0.3s; border: none; cursor: pointer;
         }
+        .btn-arancio { background: var(--arancio); color: white; }
+        .btn-arancio:hover { background: var(--arancio-hover); transform: scale(1.05); box-shadow: 0 15px 30px rgba(255,122,69,0.4); }
 
-        /* --- BOTTONE MAGNETICO --- */
-        .btn-wow {
-            display: inline-block;
-            padding: 18px 45px;
-            background: var(--arancio);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: 0.4s;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 122, 69, 0.3);
+        /* Social Floating */
+        .social-bar {
+            position: fixed; left: 30px; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 20px; z-index: 500;
         }
-        .btn-wow:hover { background: var(--verde-deep); transform: scale(1.05); }
+        .social-bar a { color: var(--white); font-size: 1.2rem; text-decoration: none; mix-blend-mode: difference; }
 
-        /* --- SEZIONE ARTICOLI (SEO) --- */
-        .articoli-section { background: var(--verde-deep); color: white; border-radius: 60px 60px 0 0; }
-        .art-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: 0.3s;
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .section-title { font-size: 2.5rem; }
         }
-        .art-card:hover { background: rgba(255,255,255,0.1); }
-        .art-img { height: 200px; background: #444; overflow: hidden; }
-        .art-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .art-card:hover img { transform: scale(1.1); }
-        .art-info { padding: 25px; }
-
-        /* --- SOCIAL FLOATING --- */
-        .social-float {
-            position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 15px; z-index: 100;
-        }
-        .social-float a {
-            width: 50px; height: 50px; background: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s;
-            text-decoration: none; font-weight: bold; color: var(--verde-deep);
-        }
-        .social-float a:hover { background: var(--arancio); color: white; }
-
     </style>
 </head>
 <body>
 
-    <nav id="navbar">
-        <div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--verde-deep); font-weight: 900;">Rita La Rosa</div>
-        <div style="display: flex; gap: 30px;">
-            <a href="#servizi" style="text-decoration: none; color: inherit; font-weight: 600;">Servizi</a>
-            <a href="#articoli" style="text-decoration: none; color: inherit; font-weight: 600;">Articoli</a>
-            <a href="#contatti" class="btn-wow" style="padding: 10px 25px;">Contatti</a>
+    <header id="header">
+        <a href="#" class="logo">Rita La Rosa</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#chi-siamo">Chi Siamo</a></li>
+            <li><a href="#servizi">Servizi</a></li>
+            <li><a href="#articoli">Articoli</a></li>
+            <li><a href="#contatti" class="btn btn-arancio" style="padding: 10px 25px;">Test</a></li>
+        </ul>
+    </header>
+
+    <div id="home" class="hero">
+        <div data-aos="zoom-out" data-aos-duration="1500">
+            <h1>Benessere <br><span style="color: var(--arancio)">Su Misura</span></h1>
+            <p style="font-size: 1.5rem; margin-bottom: 30px;">Dott.ssa Rita La Rosa: Dietista e Nutrizionista</p>
+            <a href="#contatti" class="btn btn-arancio">Inizia Ora</a>
         </div>
-    </nav>
-
-    <div class="parallax-wrapper">
-        <section class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-content" data-aos="zoom-in">
-                <h1 style="font-family: 'Playfair Display', serif; font-size: 4.5rem; color: var(--verde-deep); margin-bottom: 20px;">Nutrizione Viva.</h1>
-                <p style="font-size: 1.3rem; margin-bottom: 40px;">Trasforma il tuo rapporto con il cibo attraverso un approccio scientifico e consapevole.</p>
-                <a href="#servizi" class="btn-wow">Scopri il Metodo</a>
-            </div>
-        </section>
-
-        <section class="section-padding" id="servizi">
-            <h2 style="text-align: center; font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 60px;" data-aos="fade-up">Servizi Esclusivi</h2>
-            <div class="grid">
-                <div class="card-wow" data-aos="fade-up" data-aos-delay="100">
-                    <span style="font-size: 3rem;">🥗</span>
-                    <h3 style="margin: 20px 0;">Piani Alimentari</h3>
-                    <p>Diete personalizzate basate sulla tua biochimica unica.</p>
-                </div>
-                <div class="card-wow" data-aos="fade-up" data-aos-delay="200">
-                    <span style="font-size: 3rem;">🧠</span>
-                    <h3 style="margin: 20px 0;">Mindful Eating</h3>
-                    <p>Tecniche avanzate per eliminare la fame nervosa.</p>
-                </div>
-                <div class="card-wow" data-aos="fade-up" data-aos-delay="300">
-                    <span style="font-size: 3rem;">🔬</span>
-                    <h3 style="margin: 20px 0;">Test DNA</h3>
-                    <p>Scopri come i tuoi geni rispondono ai nutrienti.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-padding articoli-section" id="articoli">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 50px;" data-aos="fade-right">Articoli & Risorse</h2>
-            <div class="grid">
-                <div class="art-card" data-aos="flip-left">
-                    <div class="art-img"></div>
-                    <div class="art-info">
-                        <small style="color: var(--arancio)">NUTRIZIONE</small>
-                        <h4 style="margin: 10px 0; font-size: 1.4rem;">I 5 Superfood del 2026 per la tua salute</h4>
-                        <p style="opacity: 0.8; font-size: 0.9rem;">Scopri come integrare questi alimenti...</p>
-                    </div>
-                </div>
-                <div class="art-card" data-aos="flip-left" data-aos-delay="200">
-                    <div class="art-img"></div>
-                    <div class="art-info">
-                        <small style="color: var(--arancio)">MINDFULNESS</small>
-                        <h4 style="margin: 10px 0; font-size: 1.4rem;">Gestire lo stress con la dieta mediterranea</h4>
-                        <p style="opacity: 0.8; font-size: 0.9rem;">La correlazione tra intestino e cervello...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer style="padding: 60px 8%; text-align: center;">
-            <p>© 2026 Rita La Rosa - Digital Agency Excellence</p>
-        </footer>
     </div>
 
-    <div class="social-float">
+    <section id="chi-siamo">
+        <div class="about-img" data-aos="fade-right">
+             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888" style="width:100%; height:100%; object-fit:cover;" alt="Rita La Rosa">
+        </div>
+        <div class="about-text" data-aos="fade-left">
+            <h2 class="section-title">Chi Sono</h2>
+            <p>Test - Qui andrà la descrizione professionale di Rita. Un approccio empatico e scientifico per il tuo percorso alimentare.</p>
+            <br>
+            <a href="#contatti" class="btn btn-arancio">Test Cliccabile</a>
+        </div>
+    </section>
+
+    <section id="servizi">
+        <h2 class="section-title" style="text-align: center;" data-aos="fade-up">I Miei Servizi</h2>
+        <div class="grid-servizi">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Test</h3>
+                <p>Consulenza nutrizionale completa con piano alimentare personalizzato.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Test</h3>
+                <p>Analisi della composizione corporea e bioimpedenziometria.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Test</h3>
+                <p>Percorsi di educazione alimentare per famiglie e bambini.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="articoli">
+        <h2 class="section-title" data-aos="fade-right">Articoli & News</h2>
+        <div class="art-grid">
+            <article class="art-box" data-aos="flip-up">
+                <div style="height:250px; background: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2070') center/cover;"></div>
+                <div class="art-content">
+                    <span style="color: var(--arancio); font-weight: bold;">SEO TEST</span>
+                    <h3>Test Articolo 1</h3>
+                    <p>Scopri come migliorare la tua energia quotidiana...</p>
+                    <a href="#" style="color: var(--verde); font-weight: 800; text-decoration: none; margin-top: 15px; display: block;">Leggi tutto →</a>
+                </div>
+            </article>
+            <article class="art-box" data-aos="flip-up" data-aos-delay="200">
+                <div style="height:250px; background: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2070') center/cover;"></div>
+                <div class="art-content">
+                    <span style="color: var(--arancio); font-weight: bold;">SEO TEST</span>
+                    <h3>Test Articolo 2</h3>
+                    <p>La dieta mediterranea nel 2026: cosa è cambiato...</p>
+                    <a href="#" style="color: var(--verde); font-weight: 800; text-decoration: none; margin-top: 15px; display: block;">Leggi tutto →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="contatti">
+        <div class="contact-container">
+            <div style="flex: 1;" data-aos="fade-right">
+                <h2 class="section-title" style="color: white;">Lavoriamo <br>Insieme</h2>
+                <p>Test - Prenota la tua prima consulenza.</p>
+                <div style="margin-top: 30px;">
+                    <p>📍 Via Roma, 123 - Milano</p>
+                    <p>📞 +39 012 345 6789</p>
+                </div>
+            </div>
+            <form class="contact-form" data-aos="fade-left">
+                <input type="text" placeholder="Nome completo">
+                <input type="email" placeholder="Email">
+                <textarea rows="5" placeholder="Il tuo messaggio (Test)"></textarea>
+                <button type="submit" class="btn btn-arancio">Invia Richiesta</button>
+            </form>
+        </div>
+    </section>
+
+    <div class="social-bar">
         <a href="#">IG</a>
         <a href="#">FB</a>
-        <a href="#">WA</a>
+        <a href="#">LI</a>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: false });
+        AOS.init({ duration: 1000, once: false });
 
-        // Cambio stile Nav allo scroll
-        window.onscroll = function() {
-            var nav = document.getElementById('navbar');
-            if (window.pageYOffset > 100) {
-                nav.classList.add('sticky');
+        // Gestione Scroll Header
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
             } else {
-                nav.classList.remove('sticky');
+                header.classList.remove('scrolled');
             }
-        };
+        });
     </script>
 </body>
 </html>
