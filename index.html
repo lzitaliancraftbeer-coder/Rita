@@ -3,167 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rita La Rosa | Nutrizione Consapevole</title>
+    <title>Rita La Rosa | Nutrizionista & Benessere</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         :root {
             --verde-deep: #2D5A43;
-            --verde-light: #F0F7F4;
+            --verde-glass: rgba(45, 90, 67, 0.05);
             --arancio: #FF7A45;
-            --arancio-hover: #E66A39;
-            --text: #333;
+            --arancio-bright: #ff936a;
             --white: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); line-height: 1.6; overflow-x: hidden; }
-
-        /* --- Navigazione --- */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 8%; background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            color: #333; 
+            overflow-x: hidden;
+            background: #fdfdfd;
         }
-        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--verde-deep); font-weight: bold; }
-        .nav-links { display: flex; list-style: none; gap: 30px; }
-        .nav-links a { text-decoration: none; color: var(--verde-deep); font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: var(--arancio); }
 
-        /* --- Hero Section --- */
+        /* --- EFFETTO PARALLASSE HERO --- */
+        .parallax-wrapper {
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 10px; /* Cruciale per il parallasse CSS */
+        }
+
         .hero {
-            height: 90vh; display: flex; align-items: center; padding: 0 8%;
-            background: linear-gradient(135deg, var(--verde-light) 0%, #ffffff 100%);
-            position: relative; overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transform-style: preserve-3d;
+            z-index: -1;
         }
-        .hero-content { max-width: 600px; z-index: 2; }
-        .hero-content h1 { 
-            font-family: 'Playfair Display', serif; font-size: 4rem; 
-            color: var(--verde-deep); line-height: 1.1; margin-bottom: 20px;
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 120%;
+            background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), 
+                        url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            transform: translateZ(-10px) scale(2.1); /* Questo crea il movimento lento */
+            z-index: -1;
         }
-        .hero-content p { font-size: 1.2rem; margin-bottom: 30px; color: #555; }
+
+        .hero-content {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 60px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            max-width: 800px;
+        }
+
+        /* --- HEADER & NAV --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; transition: 0.4s;
+        }
+        nav.sticky { background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 15px 8%; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+
+        /* --- CARTE SERVIZI (GLASSMORPHISM) --- */
+        .section-padding { padding: 120px 8%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
+        .card-wow {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid #f0f0f0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-wow:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px rgba(45, 90, 67, 0.1);
+            border-color: var(--arancio);
+        }
+
+        /* --- BOTTONE MAGNETICO --- */
         .btn-wow {
-            padding: 15px 35px; background: var(--arancio); color: white;
-            text-decoration: none; border-radius: 50px; font-weight: bold;
-            display: inline-block; transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            padding: 18px 45px;
+            background: var(--arancio);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.4s;
+            border: none;
+            cursor: pointer;
             box-shadow: 0 10px 20px rgba(255, 122, 69, 0.3);
         }
-        .btn-wow:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(255, 122, 69, 0.4); }
+        .btn-wow:hover { background: var(--verde-deep); transform: scale(1.05); }
 
-        /* Forme decorative WOW */
-        .blob {
-            position: absolute; right: -10%; width: 600px; height: 600px;
-            background: var(--arancio); opacity: 0.1; border-radius: 50%;
-            filter: blur(80px); animation: float 10s infinite alternate;
+        /* --- SEZIONE ARTICOLI (SEO) --- */
+        .articoli-section { background: var(--verde-deep); color: white; border-radius: 60px 60px 0 0; }
+        .art-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
         }
-        @keyframes float { from { transform: translate(0,0); } to { transform: translate(-50px, 50px); } }
+        .art-card:hover { background: rgba(255,255,255,0.1); }
+        .art-img { height: 200px; background: #444; overflow: hidden; }
+        .art-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .art-card:hover img { transform: scale(1.1); }
+        .art-info { padding: 25px; }
 
-        /* --- Sezione Servizi --- */
-        .services { padding: 100px 8%; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-top: 50px; }
-        .card {
-            padding: 40px; border-radius: 24px; background: var(--white);
-            border: 1px solid #eee; transition: 0.4s; position: relative;
+        /* --- SOCIAL FLOATING --- */
+        .social-float {
+            position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 15px; z-index: 100;
         }
-        .card:hover { transform: translateY(-10px); border-color: var(--arancio); }
-        .card i { font-size: 2rem; color: var(--arancio); margin-bottom: 20px; display: block; }
-        .card h3 { color: var(--verde-deep); margin-bottom: 15px; }
+        .social-float a {
+            width: 50px; height: 50px; background: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s;
+            text-decoration: none; font-weight: bold; color: var(--verde-deep);
+        }
+        .social-float a:hover { background: var(--arancio); color: white; }
 
-        /* --- Sezione Articoli (SEO Optimized) --- */
-        .articoli { padding: 100px 8%; background: var(--verde-deep); color: white; }
-        .articoli h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 40px; }
-        .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .art-item { 
-            background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;
-            transition: 0.3s; border-left: 4px solid var(--arancio);
-        }
-        .art-item:hover { background: rgba(255,255,255,0.1); }
-        .art-item h4 { margin-bottom: 10px; color: var(--arancio); }
-
-        /* --- Footer & Social --- */
-        footer { padding: 50px 8%; background: #f9f9f9; text-align: center; }
-        .social-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; }
-        .social-links a { 
-            width: 45px; height: 45px; border-radius: 50%; background: var(--verde-deep);
-            color: white; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; transition: 0.3s;
-        }
-        .social-links a:hover { background: var(--arancio); transform: scale(1.1); }
-
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .art-grid { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Rita La Rosa</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#chi-siamo">Chi Sono</a></li>
-            <li><a href="#servizi">Servizi</a></li>
-            <li><a href="#articoli">Articoli</a></li>
-            <li><a href="#contatti">Contatti</a></li>
-        </ul>
+    <nav id="navbar">
+        <div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--verde-deep); font-weight: 900;">Rita La Rosa</div>
+        <div style="display: flex; gap: 30px;">
+            <a href="#servizi" style="text-decoration: none; color: inherit; font-weight: 600;">Servizi</a>
+            <a href="#articoli" style="text-decoration: none; color: inherit; font-weight: 600;">Articoli</a>
+            <a href="#contatti" class="btn-wow" style="padding: 10px 25px;">Contatti</a>
+        </div>
     </nav>
 
-    <section class="hero" id="home">
-        <div class="blob"></div>
-        <div class="hero-content">
-            <h1>Nutri la tua mente, ama il tuo corpo.</h1>
-            <p>Esplora il Metodo Mangia Consapevole: un percorso personalizzato per ritrovare l'equilibrio senza rinunce drastiche.</p>
-            <a href="#contatti" class="btn-wow">Inizia il tuo Percorso</a>
-        </div>
-    </section>
+    <div class="parallax-wrapper">
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content" data-aos="zoom-in">
+                <h1 style="font-family: 'Playfair Display', serif; font-size: 4.5rem; color: var(--verde-deep); margin-bottom: 20px;">Nutrizione Viva.</h1>
+                <p style="font-size: 1.3rem; margin-bottom: 40px;">Trasforma il tuo rapporto con il cibo attraverso un approccio scientifico e consapevole.</p>
+                <a href="#servizi" class="btn-wow">Scopri il Metodo</a>
+            </div>
+        </section>
 
-    <section class="services" id="servizi">
-        <h6>I MIEI SERVIZI</h6>
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--verde-deep);">Consulenze Su Misura</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Visita Nutrizionale</h3>
-                <p>Analisi della composizione corporea e piano alimentare personalizzato per i tuoi obiettivi.</p>
+        <section class="section-padding" id="servizi">
+            <h2 style="text-align: center; font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 60px;" data-aos="fade-up">Servizi Esclusivi</h2>
+            <div class="grid">
+                <div class="card-wow" data-aos="fade-up" data-aos-delay="100">
+                    <span style="font-size: 3rem;">🥗</span>
+                    <h3 style="margin: 20px 0;">Piani Alimentari</h3>
+                    <p>Diete personalizzate basate sulla tua biochimica unica.</p>
+                </div>
+                <div class="card-wow" data-aos="fade-up" data-aos-delay="200">
+                    <span style="font-size: 3rem;">🧠</span>
+                    <h3 style="margin: 20px 0;">Mindful Eating</h3>
+                    <p>Tecniche avanzate per eliminare la fame nervosa.</p>
+                </div>
+                <div class="card-wow" data-aos="fade-up" data-aos-delay="300">
+                    <span style="font-size: 3rem;">🔬</span>
+                    <h3 style="margin: 20px 0;">Test DNA</h3>
+                    <p>Scopri come i tuoi geni rispondono ai nutrienti.</p>
+                </div>
             </div>
-            <div class="card">
-                <h3>Mindful Eating</h3>
-                <p>Impara a gestire il rapporto emotivo con il cibo e a riconoscere i segnali di fame e sazietà.</p>
-            </div>
-            <div class="card">
-                <h3>Percorsi Sportivi</h3>
-                <p>Ottimizza la tua performance attraverso un'integrazione e un'alimentazione specifica.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="articoli" id="articoli">
-        <h2>Articoli & Consigli</h2>
-        <div class="art-grid">
-            <div class="art-item">
-                <h4>01. SEO Topic</h4>
-                <p>Come la nutrizione influisce sul sonno: 5 consigli pratici.</p>
+        <section class="section-padding articoli-section" id="articoli">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 50px;" data-aos="fade-right">Articoli & Risorse</h2>
+            <div class="grid">
+                <div class="art-card" data-aos="flip-left">
+                    <div class="art-img"></div>
+                    <div class="art-info">
+                        <small style="color: var(--arancio)">NUTRIZIONE</small>
+                        <h4 style="margin: 10px 0; font-size: 1.4rem;">I 5 Superfood del 2026 per la tua salute</h4>
+                        <p style="opacity: 0.8; font-size: 0.9rem;">Scopri come integrare questi alimenti...</p>
+                    </div>
+                </div>
+                <div class="art-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="art-img"></div>
+                    <div class="art-info">
+                        <small style="color: var(--arancio)">MINDFULNESS</small>
+                        <h4 style="margin: 10px 0; font-size: 1.4rem;">Gestire lo stress con la dieta mediterranea</h4>
+                        <p style="opacity: 0.8; font-size: 0.9rem;">La correlazione tra intestino e cervello...</p>
+                    </div>
+                </div>
             </div>
-            <div class="art-item">
-                <h4>02. Ricette Light</h4>
-                <p>Colazioni bilanciate per iniziare la giornata con energia.</p>
-            </div>
-            <div class="art-item">
-                <h4>03. Mindset</h4>
-                <p>Perché le diete restrittive non funzionano nel lungo termine.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <footer id="contatti">
-        <p>Seguimi sui social per consigli quotidiani</p>
-        <div class="social-links">
-            <a href="#">IG</a>
-            <a href="#">FB</a>
-            <a href="#">LI</a>
-        </div>
-        <p>&copy; 2024 Rita La Rosa - Dott.ssa Dietista Nutrizionista</p>
-    </footer>
+        <footer style="padding: 60px 8%; text-align: center;">
+            <p>© 2026 Rita La Rosa - Digital Agency Excellence</p>
+        </footer>
+    </div>
 
+    <div class="social-float">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+        <a href="#">WA</a>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: false });
+
+        // Cambio stile Nav allo scroll
+        window.onscroll = function() {
+            var nav = document.getElementById('navbar');
+            if (window.pageYOffset > 100) {
+                nav.classList.add('sticky');
+            } else {
+                nav.classList.remove('sticky');
+            }
+        };
+    </script>
 </body>
 </html>
